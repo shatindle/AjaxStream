@@ -30,23 +30,23 @@
 $.ajaxStream = 
 (function($) {
 	// js GUID
+	function _s() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+	
 	function _g(n) {
 		var _r = "";
 		
 		if (typeof n != "number")
 			n = 5;
-			
-        function _s() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
 		
 		for (var i = 0; i < n.length; i++)
 			_r += _s() + "_";
 			
-        return _r;
-    }
+        	return _r;
+    	}
 	
 	// unique ids
 	var _i = {
@@ -111,24 +111,24 @@ $.ajaxStream =
 	
 		try {
 			if (frame[0].contentWindow) {
-                xhtml.responseText =
-                    frame.contents().find("body").length > 0 ?
-                    (
-                        frame.contents().find("body").find("pre").length > 0 ?
-                        frame.contents().find("body").find("pre").html() :
-                        frame.contents().find("body").html()
-                    ) :
-                    (
-                        frame[0].contentWindow.document.body ?
-                        (
-                            frame[0].contentWindow.document.body.getElementByName("pre") ?
-                            frame[0].contentWindow.document.body.getElementByName("pre").innerHTML :
-                            frame[0].contentWindow.document.body.innerHTML
-                        ) :
-                        frame[0].contentWindow.document.body.innerHTML
-                    );
-                xhtml.responseXML = frame[0].contentWindow.document.XMLDocument ? frame[0].contentWindow.document.XMLDocument : frame[0].contentWindow.document;
-            }
+	                	xhtml.responseText =
+	                    	frame.contents().find("body").length > 0 ?
+	                    	(
+	                        	frame.contents().find("body").find("pre").length > 0 ?
+	                        	frame.contents().find("body").find("pre").html() :
+	                        	frame.contents().find("body").html()
+	                    	) :
+	                    	(
+	                        	frame[0].contentWindow.document.body ?
+	                        	(
+	                            		frame[0].contentWindow.document.body.getElementByName("pre") ?
+	                            		frame[0].contentWindow.document.body.getElementByName("pre").innerHTML :
+	                            		frame[0].contentWindow.document.body.innerHTML
+	                        	) :
+	                        	frame[0].contentWindow.document.body.innerHTML
+	                    	);
+	                	xhtml.responseXML = frame[0].contentWindow.document.XMLDocument ? frame[0].contentWindow.document.XMLDocument : frame[0].contentWindow.document;
+            		}
 		} catch (e) {
 			// handle the error...
 			if (p.debug) 
@@ -137,9 +137,9 @@ $.ajaxStream =
 		
 		try {
 			if (frame[0].contentDocument) {
-                xhtml.responseText = frame[0].contentDocument.document.body ? frame[0].contentDocument.document.body.innerHTML : null;
-                xhtml.responseXML = frame[0].contentDocument.document.XMLDocument ? frame[0].contentDocument.document.XMLDocument : frame[0].contentDocument.document;
-            }
+                		xhtml.responseText = frame[0].contentDocument.document.body ? frame[0].contentDocument.document.body.innerHTML : null;
+                		xhtml.responseXML = frame[0].contentDocument.document.XMLDocument ? frame[0].contentDocument.document.XMLDocument : frame[0].contentDocument.document;
+            		}
 		} catch (e) {
 			// handle the error...
 			if (p.debug) 
@@ -147,12 +147,12 @@ $.ajaxStream =
 		}
 		
 		if (xhtml || timeout === "timeout") {
-            done = true;
+            		done = true;
 			
-            try {
-                status = timeout !== "timeout" ? "success" : "error";
+            		try {
+                		status = timeout !== "timeout" ? "success" : "error";
 
-                if (status !== "error") {
+                		if (status !== "error") {
 					p.dataType = p.dataType.toLowerCase();
 					if (p.dataType !== "file") {
 						var data = p.dataType === "xml" ? xhtml.responseXML : xhtml.responseText;
@@ -169,62 +169,63 @@ $.ajaxStream =
 					
 					if (p.global) 
 						$.event.trigger("ajaxSuccess", [xhtml]);
-                } else {
-                    // handle the error...
-                    if (p.debug) 
+                		} else {
+                    			// handle the error...
+                    			if (p.debug) 
 						console.log("Executing ajaxError");
                     
-                    if (typeof p.error === typeof Function) 
+                    			if (typeof p.error === typeof Function) 
 						p.error(xhtml, status, "ajax failure on ie");
 						
-                    if (p.global) 
+                    			if (p.global) 
 						$.event.trigger("ajaxError", [xhtml]);
-                }
-                //if (param.global) $.event.trigger("ajaxComplete", [xhtml]);
-            } catch (e) {
-                // handle the error...
-                if (p.debug) console.log("unexpected error: " + e);
-                try {
-                    // retry code
-                    if (typeof p.error === typeof Function) 
+                		}
+                		//if (param.global) $.event.trigger("ajaxComplete", [xhtml]);
+            		} catch (e) {
+                		// handle the error...
+                		if (p.debug) console.log("unexpected error: " + e);
+                		try {
+                			// retry code
+                    			if (typeof p.error === typeof Function) 
 						p.error(xhtml, status, "ajax failure on ie");
-                } catch (ee) { 
+                		} catch (ee) { 
 					/* nothing left to do */ 
 					throw;
 				}
-            }
+            		}
 
-            // request complete
-            if (p.global) 
+            		// request complete
+            		if (p.global) 
 				$.event.trigger("ajaxComplete", [xhtml]);
 
-            // handle the global ajax counter
-            if (p.global && ! --$.active) 
+            		// handle the global ajax counter
+            		if (p.global && ! --$.active) 
 				$.event.trigger("ajaxStop");
 
-            // process it
-            if (typeof p.complete === typeof Function) 
+            		// process it
+            		if (typeof p.complete === typeof Function) 
 				p.complete(xhtml, status);
 				
-            frame.unbind();
+            		frame.unbind();
 			
-            try {
-                frame.remove();
-            } catch (e) {
-                // handle the error...
-                if (p.debug) 
+            		try {
+                		frame.remove();
+            		} catch (e) {
+                		// handle the error...
+                		if (p.debug) 
 					console.log("failed to remove frame");
-            }
-            try {
-                form.remove();
-            } catch (e) {
-                // handle the error...
-                if (p.debug) 
+            		}
+            
+            		try {
+                		form.remove();
+            		} catch (e) {
+                		// handle the error...
+                		if (p.debug) 
 					console.log("failed to remove form");
-            }
+            		}
 			delete xhtml;
-            //xhtml = null;
-        }
+            		//xhtml = null;
+        	}
 	}
 	
 	function real(p) {
@@ -296,9 +297,11 @@ $.ajaxStream =
 		if (p.files instanceof Array && p.files.length > 0) {
 			try {
 				var c = 0;
+				var origobj;
+				var clone;
 				for (var i = 0; i < p.files.length; i++) {
-					var origobj = $(p.files[i]);
-					var clone = origobj.clone();
+					origobj = $(p.files[i]);
+					clone = origobj.clone();
 					origobj.attr("id", _i.i + processId + c++);
 					origobj.before(clone);
 					origobj.appendTo(processForm);
@@ -318,13 +321,15 @@ $.ajaxStream =
 		});
 		
 		// look for new requests
-		if (p.global && !$.active++) $.event.trigger("ajaxStart");
+		if (p.global && !$.active++) 
+			$.event.trigger("ajaxStart");
 		
 		var done = false;
 		
 		// build request
 		var xhtml = {};
-		if (p.global) $.event.trigger("ajaxSend", [xhtml]);
+		if (p.global) 
+			$.event.trigger("ajaxSend", [xhtml]);
 
 		if (p.timeout > 0) 
 			setTimeout(function () { 
