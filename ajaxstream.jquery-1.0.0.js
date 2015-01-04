@@ -27,7 +27,6 @@
  * 
  */
  
-$.ajaxStream = 
 (function($) {
 	// js GUID
 	function _s() {
@@ -398,5 +397,5 @@ $.ajaxStream =
 		return;
 	}
 	
-	return main;
+	$.ajaxStream = main;
 })($);
