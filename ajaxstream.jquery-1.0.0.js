@@ -57,7 +57,7 @@
 	// form builder
 	function makeForm(p) {
 		// id unique to the page
-		var i = _g(1) + new Date().getTime();
+		var i = "streamfile_" + _g(2) + new Date().getTime();
 		var f = {
 			o: _i.o + i
 		};
@@ -79,7 +79,7 @@
 	// frame builder
 	function makeFrame() {
 		// id unique to the page
-		var i = _g(1) + new Date().getTime();
+		var i = "streamfile_" + _g(2) + new Date().getTime();
 		var f = {
 			r: _i.r + i
 		};
