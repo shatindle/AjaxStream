@@ -27,6 +27,24 @@
  * 
  */
  
+ /*
+  * Parameters and usage
+  * 
+  * Basic:
+  * $.ajaxStream(parameters);
+  * 
+  * Options:
+  * 	url: String
+  * 	data: Object - complex or simple JavaScript serializable object
+  * 	dataType: String - "json", "html", "xml", "script", "file"
+  * 	files: Array - input elements in an array with type "file"
+  * 	timeout: Number - (-1) for unlimited or a positive integer greater than 0
+  * 	success: Function - 2xx status code
+  * 	error: Function - status code other than 2xx
+  * 	complete: Function - runs after success or error regardless of outcome
+  * 
+  */
+ 
 (function($) {
 	// js GUID
 	function _s() {
