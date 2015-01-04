@@ -56,7 +56,7 @@
 	function _g(n) {
 		var _r = "";
 		
-		if (typeof n != "number")
+		if (typeof n !== "number")
 			n = 5;
 		
 		for (var i = 0; i < n.length; i++)
@@ -81,17 +81,16 @@
 		};
 		
 		// return object
-		return $("<form/>")
-			.attr("method", "POST")
-			.attr("name", f.o)
-			.attr("id", f.o)
-			.attr("enctype", "multipart/form-data")
-			.css({ 
+		return $("<form/>").attr({
+				method: "POST",
+				name: f.o,
+				id: f.o,
+				enctype: "multipart/form-data"
+			}).css({ 
 				position: "absolute", 
-				top: "-1200px", 
-				left: "-1200px" 
-			})
-			.appendTo("body");
+				top: -1200, 
+				left: -1200
+			}).appendTo("body");
 	}
 	
 	// frame builder
@@ -103,23 +102,20 @@
 		};
 		
 		// return object
-		return $("<iframe/>")
-			.attr("id", f.r)
-			.attr("name", f.r)
-			.css({
+		return $("<iframe/>").attr({
+				id: f.r,
+				name: f.r,
+				src: "about:blank"
+			}).css({
 				position: "absolute",
 				top: -9999,
 				left: -9999
-			})
-			.attr("src", "about:blank")
-			.appendTo("body");
+			}).appendTo("body");
 	}
 	
 	// input builder
 	function makeInput(n, v) {
-		return $("<input/>")
-			.attr("name", n)
-			.val(v);
+		return $("<input/>").attr("name", n).val(v);
 	}
 	
 	// response handler
