@@ -317,7 +317,7 @@ $.ajaxStream =
 		// only allow POST
 		
 		$.each(p.data, function(name, obj) {
-			processForm.append(makeInput(name, JSON.stringify(obj));
+			processForm.append(makeInput(name, JSON.stringify(obj)));
 		});
 		
 		// look for new requests
