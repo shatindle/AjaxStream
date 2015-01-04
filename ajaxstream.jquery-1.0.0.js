@@ -190,7 +190,7 @@ $.ajaxStream =
 						p.error(xhtml, status, "ajax failure on ie");
                 		} catch (ee) { 
 					/* nothing left to do */ 
-					throw;
+					throw ee;
 				}
             		}
 
